@@ -1,12 +1,15 @@
-import { Map } from "immutable";
+import { produce } from "immer";
 
-let book = Map({ title: "Harry Potter" }); //to get a map object
+let book = { title: "Harry Potter" };
 
 function publish(book) {
-  return book.set("isPublished", true); //brings a new object
+  //returning the new updated object
+  return produce(book, (draftBook) => {
+    draftBook.isPublished = true;
+  });
 }
 
-book = publish(book); //re-assign to book
+let updated = publish(book); //returns a new book
 
-//console.log(book.get("title"));// to get the property value
-console.log(book.toJS()); //to get a js object
+console.log(book);
+console.log(updated);
