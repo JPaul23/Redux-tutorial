@@ -1,11 +1,20 @@
-import { compose, pipe } from "lodash/fp";
+const person = {
+  name: "John",
+  address: {
+    country: "USA",
+    city: "San Jose",
+  },
+};
 
-let input = " JavaScript  ";
+/* when working with nested object, we use the deep copy to prevent the sharrow copying */
+const updated = {
+  ...person,
+  address: {
+    ...person.address,
+    city: "New York",
+  },
+  name: "Bob",
+};
 
-const trim = (str) => str.trim();
-const wrap = (type) => (str) => `<${type}>${str}</${type}>`;
-const toLowerCase = (str) => str.toLowerCase();
-
-const transform = pipe(trim, toLowerCase, wrap("span")); //order from left to right
-transform(input);
-console.log(transform(input));
+console.log(person);
+console.log(updated);
